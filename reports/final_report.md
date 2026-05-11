@@ -43,7 +43,7 @@ Banka Mobil & İnternet Bankacılığı para transferlerinde fraud tespiti. 849.
 Detaylı tablo: `reports/model_comparison.md`. Özet:
 
 
-- **En iyi model:** `hist_gbm__full` (Test PR-AUC = 0.3575).
+- **En iyi model:** `hist_gbm__full` (Test PR-AUC = 0.8052).
 
 
 ## 6. Threshold politikası

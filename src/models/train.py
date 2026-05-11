@@ -28,9 +28,10 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
 
+import yaml
 from ..data.loader import load_validated, REPO_ROOT
 from ..features.instant import add_derived
-from ..features.historical import add_label_free_aggregates
+from ..features.historical import add_label_free_aggregates, add_label_dependent_aggregates
 from .split import time_based_split, entity_overlap
 from .metrics import summary
 
@@ -63,10 +64,23 @@ class TrainOutput:
     test_metrics: dict
 
 
+def _features_config() -> dict:
+    with open(REPO_ROOT / "configs" / "features.yaml") as f:
+        return yaml.safe_load(f)
+
+
 def _build_full_frame() -> pd.DataFrame:
     df, _ = load_validated()
     df = add_derived(df, daytype_nan="unknown")
     df = add_label_free_aggregates(df)
+    cfg = _features_config()
+    ld = cfg.get("historical_label_dependent") or {}
+    if ld.get("enabled"):
+        lag = int(ld.get("label_availability_lag_days", 7))
+        sm = ld.get("smoothing") or {}
+        prior = float(sm.get("prior_strength", 50))
+        df = add_label_dependent_aggregates(df, label_lag_days=lag, prior_strength=prior)
+        print(f"[train] label-dependent FE enabled (lag={lag}d, prior={prior})")
     return df
 
 
@@ -109,10 +123,25 @@ def _model_rf(num, cat) -> Pipeline:
     ])
 
 
+_HGB_DEFAULTS = {
+    "learning_rate": 0.05, "max_iter": 400, "max_leaf_nodes": 63,
+    "min_samples_leaf": 100, "l2_regularization": 1.0, "max_features": 1.0,
+}
+
+
+def _load_hgb_params() -> dict:
+    """artifacts/best_hgb_params.json varsa onu döner; yoksa defaults."""
+    p = REPO_ROOT / "artifacts" / "best_hgb_params.json"
+    if not p.exists():
+        return dict(_HGB_DEFAULTS)
+    payload = json.loads(p.read_text())
+    out = dict(_HGB_DEFAULTS)
+    out.update(payload.get("params", {}))
+    return out
+
+
 def _model_hgb(num, cat) -> Pipeline:
-    """HistGradientBoostingClassifier — sklearn native, libomp gerekmiyor.
-    OrdinalEncoder + native categorical support kullanılıyor (one-hot patlamasını önler).
-    """
+    """HistGradientBoostingClassifier — params artifacts/best_hgb_params.json'dan okunur."""
     pre = ColumnTransformer([
         ("num", SimpleImputer(strategy="median"), num),
         ("cat", Pipeline([
@@ -121,11 +150,13 @@ def _model_hgb(num, cat) -> Pipeline:
         ]), cat),
     ])
     cat_indices = list(range(len(num), len(num) + len(cat)))
+    p = _load_hgb_params()
     return Pipeline([
         ("pre", pre),
         ("clf", HistGradientBoostingClassifier(
-            learning_rate=0.05, max_iter=400, max_leaf_nodes=63,
-            min_samples_leaf=100, l2_regularization=1.0,
+            learning_rate=p["learning_rate"], max_iter=p["max_iter"],
+            max_leaf_nodes=p["max_leaf_nodes"], min_samples_leaf=p["min_samples_leaf"],
+            l2_regularization=p["l2_regularization"], max_features=p.get("max_features", 1.0),
             class_weight="balanced", categorical_features=cat_indices,
             random_state=42,
         )),
