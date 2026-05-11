@@ -1,0 +1,356 @@
+{
+  "schema": {
+    "ok": true,
+    "missing": [],
+    "extra": []
+  },
+  "basic": {
+    "n_rows": 849564,
+    "n_cols": 26,
+    "memory_mb": 306.0,
+    "fraud_count": 5338,
+    "fraud_rate": 0.006283,
+    "imbalance_ratio_1_to": 159,
+    "date_min": "2022-09-17 00:13:54.807000",
+    "date_max": "2024-09-13 23:55:51.807635",
+    "date_span_days": 727,
+    "duplicates_full_row": 0,
+    "duplicates_business_key": 0
+  },
+  "missing": {
+    "DayType": {
+      "n": 819083,
+      "pct": 96.4122
+    },
+    "CustomerEducation": {
+      "n": 14132,
+      "pct": 1.6634
+    },
+    "CustomerMaritalStatus": {
+      "n": 188,
+      "pct": 0.0221
+    }
+  },
+  "cardinality": {
+    "BusinessKey": 849564,
+    "AccountNumber": 789861,
+    "TransactionDate": 849427,
+    "TransactionType": 3,
+    "TransactionChannel": 1,
+    "ReceiverName": 135758,
+    "SenderName": 7242,
+    "IsFraudTransaction": 2,
+    "HasMobileActivationL1H": 2,
+    "HasMobileActivationL8H": 2,
+    "DayType": 2,
+    "CustomerName": 6894,
+    "CustomerSegment": 9,
+    "CustomerAge": 72,
+    "CustomerTenure": 262,
+    "CustomerEducation": 9,
+    "CustomerProfession": 112,
+    "CustomerMaritalStatus": 4,
+    "CustomerGender": 2,
+    "IsFractionalAmount": 2,
+    "TransactionAmount": 849564,
+    "DeviceModel": 1004,
+    "DeviceOSName": 2,
+    "DeviceId": 13580,
+    "IP_Subnet": 29004,
+    "UniqueIPCount": 681
+  },
+  "quarterly_fraud": [
+    {
+      "quarter": "2022Q3",
+      "n": 5762,
+      "fraud": 0,
+      "rate_pct": 0.0
+    },
+    {
+      "quarter": "2022Q4",
+      "n": 66049,
+      "fraud": 25,
+      "rate_pct": 0.0379
+    },
+    {
+      "quarter": "2023Q1",
+      "n": 85504,
+      "fraud": 281,
+      "rate_pct": 0.3286
+    },
+    {
+      "quarter": "2023Q2",
+      "n": 98465,
+      "fraud": 931,
+      "rate_pct": 0.9455
+    },
+    {
+      "quarter": "2023Q3",
+      "n": 109652,
+      "fraud": 1381,
+      "rate_pct": 1.2594
+    },
+    {
+      "quarter": "2023Q4",
+      "n": 117063,
+      "fraud": 1272,
+      "rate_pct": 1.0866
+    },
+    {
+      "quarter": "2024Q1",
+      "n": 122933,
+      "fraud": 884,
+      "rate_pct": 0.7191
+    },
+    {
+      "quarter": "2024Q2",
+      "n": 129409,
+      "fraud": 415,
+      "rate_pct": 0.3207
+    },
+    {
+      "quarter": "2024Q3",
+      "n": 114727,
+      "fraud": 149,
+      "rate_pct": 0.1299
+    }
+  ],
+  "breakdowns": {
+    "TransactionType": [
+      {
+        "value": "Fast",
+        "n": 662353,
+        "fraud": 4529,
+        "rate_pct": 0.6838
+      },
+      {
+        "value": "Havale",
+        "n": 170785,
+        "fraud": 632,
+        "rate_pct": 0.3701
+      },
+      {
+        "value": "Eft",
+        "n": 16426,
+        "fraud": 177,
+        "rate_pct": 1.0776
+      }
+    ],
+    "TransactionChannel": [
+      {
+        "value": "Mobile",
+        "n": 849564,
+        "fraud": 5338,
+        "rate_pct": 0.6283
+      }
+    ],
+    "DeviceOSName": [
+      {
+        "value": "Android",
+        "n": 502443,
+        "fraud": 4632,
+        "rate_pct": 0.9219
+      },
+      {
+        "value": "IOS",
+        "n": 347121,
+        "fraud": 706,
+        "rate_pct": 0.2034
+      }
+    ],
+    "HasMobileActivationL1H": [
+      {
+        "value": "0",
+        "n": 846853,
+        "fraud": 5040,
+        "rate_pct": 0.5951
+      },
+      {
+        "value": "1",
+        "n": 2711,
+        "fraud": 298,
+        "rate_pct": 10.9923
+      }
+    ],
+    "HasMobileActivationL8H": [
+      {
+        "value": "0",
+        "n": 845069,
+        "fraud": 4970,
+        "rate_pct": 0.5881
+      },
+      {
+        "value": "1",
+        "n": 4495,
+        "fraud": 368,
+        "rate_pct": 8.1869
+      }
+    ],
+    "DayType": [
+      {
+        "value": "nan",
+        "n": 819083,
+        "fraud": 5143,
+        "rate_pct": 0.6279
+      },
+      {
+        "value": "Resmi Tatil",
+        "n": 21426,
+        "fraud": 185,
+        "rate_pct": 0.8634
+      },
+      {
+        "value": "Yarım Gün Resmi Tatil",
+        "n": 9055,
+        "fraud": 10,
+        "rate_pct": 0.1104
+      }
+    ],
+    "CustomerSegment": [
+      {
+        "value": "C",
+        "n": 307388,
+        "fraud": 1283,
+        "rate_pct": 0.4174
+      },
+      {
+        "value": "B",
+        "n": 218908,
+        "fraud": 1148,
+        "rate_pct": 0.5244
+      },
+      {
+        "value": "D",
+        "n": 196422,
+        "fraud": 854,
+        "rate_pct": 0.4348
+      },
+      {
+        "value": "A2",
+        "n": 55945,
+        "fraud": 437,
+        "rate_pct": 0.7811
+      },
+      {
+        "value": "P",
+        "n": 32716,
+        "fraud": 1219,
+        "rate_pct": 3.726
+      },
+      {
+        "value": "A1",
+        "n": 31976,
+        "fraud": 333,
+        "rate_pct": 1.0414
+      },
+      {
+        "value": "KP",
+        "n": 2128,
+        "fraud": 29,
+        "rate_pct": 1.3628
+      },
+      {
+        "value": "T",
+        "n": 2065,
+        "fraud": 7,
+        "rate_pct": 0.339
+      },
+      {
+        "value": "Y",
+        "n": 2016,
+        "fraud": 28,
+        "rate_pct": 1.3889
+      }
+    ],
+    "CustomerGender": [
+      {
+        "value": "Erkek",
+        "n": 685880,
+        "fraud": 4046,
+        "rate_pct": 0.5899
+      },
+      {
+        "value": "Kadın",
+        "n": 163684,
+        "fraud": 1292,
+        "rate_pct": 0.7893
+      }
+    ],
+    "IsFractionalAmount": [
+      {
+        "value": "False",
+        "n": 751700,
+        "fraud": 3233,
+        "rate_pct": 0.4301
+      },
+      {
+        "value": "True",
+        "n": 97864,
+        "fraud": 2105,
+        "rate_pct": 2.1509
+      }
+    ]
+  },
+  "entities": {
+    "AccountNumber": {
+      "unique_entities": 789861,
+      "tx_per_entity_mean": 1.076,
+      "tx_per_entity_median": 1.0,
+      "tx_per_entity_p90": 1.0,
+      "tx_per_entity_p99": 2.0,
+      "tx_per_entity_max": 10730,
+      "entities_with_fraud": 5338,
+      "entities_with_only_fraud": 5288
+    },
+    "DeviceId": {
+      "unique_entities": 13580,
+      "tx_per_entity_mean": 62.56,
+      "tx_per_entity_median": 21.0,
+      "tx_per_entity_p90": 166.0,
+      "tx_per_entity_p99": 553.2099999999991,
+      "tx_per_entity_max": 4373,
+      "entities_with_fraud": 785,
+      "entities_with_only_fraud": 523
+    },
+    "ReceiverName": {
+      "unique_entities": 135758,
+      "tx_per_entity_mean": 6.258,
+      "tx_per_entity_median": 2.0,
+      "tx_per_entity_p90": 12.0,
+      "tx_per_entity_p99": 66.0,
+      "tx_per_entity_max": 5586,
+      "entities_with_fraud": 915,
+      "entities_with_only_fraud": 576
+    },
+    "SenderName": {
+      "unique_entities": 7242,
+      "tx_per_entity_mean": 117.311,
+      "tx_per_entity_median": 50.0,
+      "tx_per_entity_p90": 309.0,
+      "tx_per_entity_p99": 847.9500000000007,
+      "tx_per_entity_max": 4634,
+      "entities_with_fraud": 1006,
+      "entities_with_only_fraud": 111
+    },
+    "CustomerName": {
+      "unique_entities": 6894,
+      "tx_per_entity_mean": 123.232,
+      "tx_per_entity_median": 56.0,
+      "tx_per_entity_p90": 325.0,
+      "tx_per_entity_p99": 863.0699999999997,
+      "tx_per_entity_max": 4665,
+      "entities_with_fraud": 981,
+      "entities_with_only_fraud": 109
+    },
+    "IP_Subnet": {
+      "unique_entities": 29004,
+      "tx_per_entity_mean": 29.291,
+      "tx_per_entity_median": 8.0,
+      "tx_per_entity_p90": 88.0,
+      "tx_per_entity_p99": 203.0,
+      "tx_per_entity_max": 1021,
+      "entities_with_fraud": 709,
+      "entities_with_only_fraud": 32
+    }
+  }
+}

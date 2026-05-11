@@ -1,0 +1,72 @@
+instant_numeric:
+  - TransactionAmount
+  - CustomerAge
+  - CustomerTenure
+  - UniqueIPCount
+  - HasMobileActivationL1H
+  - HasMobileActivationL8H
+
+instant_boolean:
+  - IsFractionalAmount
+
+instant_categorical:
+  - TransactionType
+  - DeviceOSName
+  - DeviceModel
+  - CustomerSegment
+  - CustomerEducation
+  - CustomerProfession
+  - CustomerMaritalStatus
+  - CustomerGender
+  - DayType
+
+derived:
+  - amount_log
+  - amount_bucket
+  - is_round_amount
+  - hour
+  - dow
+  - is_weekend
+  - is_holiday
+  - os_l1h
+  - os_l8h
+
+# Historical aggregate features — label-FREE (production-safe, no label delay risk)
+historical_label_free:
+  device:
+    windows_days: [1, 7, 30]
+    stats: [tx_count, distinct_accounts, distinct_receivers, distinct_subnets, first_seen_days_ago]
+  receiver:
+    windows_days: [7, 30]
+    stats: [tx_count, distinct_senders, distinct_devices, first_seen_days_ago]
+  subnet:
+    windows_days: [7]
+    stats: [tx_count, distinct_devices]
+  account:
+    stats: [first_seen_days_ago]  # geçmiş yok, sadece "ilk mi?" marker'ı
+
+# Historical aggregate features — label-DEPENDENT (label delay riski taşır)
+historical_label_dependent:
+  enabled: false  # ilk turda kapalı; ikinci turda lag ile açılır
+  label_availability_lag_days: 7
+  device:
+    windows_days: [30]
+    stats: [fraud_rate_smoothed]
+  receiver:
+    windows_days: [30]
+    stats: [fraud_rate_smoothed]
+  smoothing:
+    method: bayesian
+    prior_strength: 50  # m, fraud_rate = (k + m*p_global) / (n + m)
+
+# Demografik feature ablation
+demographic_columns:
+  - CustomerAge
+  - CustomerGender
+  - CustomerEducation
+  - CustomerMaritalStatus
+
+# DayType NaN yorumu — iki varyantta test edilir
+daytype_nan_treatment_variants:
+  - normal     # NaN → "Normal" kategorisi
+  - unknown    # NaN → ayrı "Unknown" kategorisi

@@ -1,0 +1,13 @@
+split:
+  strategy: time_based
+  train_end: "2024-03-31 23:59:59"
+  val_start: "2024-04-01 00:00:00"
+  val_end:   "2024-05-31 23:59:59"
+  test_start: "2024-06-01 00:00:00"
+  test_end:   "2024-09-30 23:59:59"
+
+random_benchmark:
+  enabled: true
+  test_size: 0.2
+  stratify_on_target: true
+  random_state: 42

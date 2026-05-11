@@ -1,0 +1,16 @@
+policy:
+  bands:
+    HIGH:   {percentile: 0.001, action: BLOCK_OR_STEP_UP}   # top 0.1%
+    MEDIUM: {percentile: 0.01,  action: MANUAL_REVIEW}      # top 1%
+    LOW:    {percentile: 1.0,   action: ALLOW}
+
+# Threshold raporlamada iki perspektif birden döner:
+report_perspectives:
+  dataset_relative_percentiles: [0.001, 0.005, 0.01, 0.05]
+  business_scenario_alerts_per_day: [50, 100, 350, 1000]
+
+# Dataset hacmi referansı (727 gün, 849564 tx → ~1168 tx/gün)
+dataset_volume:
+  total_transactions: 849564
+  total_days: 727
+  tx_per_day_avg: 1168

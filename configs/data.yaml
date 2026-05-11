@@ -1,0 +1,9 @@
+data:
+  path: synthetic_data.parquet
+  schema_version: v1
+  target_column: IsFraudTransaction
+  id_column: BusinessKey
+  timestamp_column: TransactionDate
+
+drop_columns:
+  - TransactionChannel  # tek değerli ("Mobile") — sinyalsiz

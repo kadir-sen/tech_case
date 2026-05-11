@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Veri (case study için sağlanan parquet — kullanıcı yerel olarak yerleştirir)
+synthetic_data.parquet
+
+# Training artifacts — büyük, reproducible. Final raporları beslemek için tutulanlar hariç.
+artifacts/models/*.joblib
+artifacts/train.log
+
+# Notebook outputs — execute olmadan commit'lenir
+# (notebook'lar src/'i import eden ince katman; output'lar çalıştırılınca üretilir)
