@@ -28,9 +28,10 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
 
+import yaml
 from ..data.loader import load_validated, REPO_ROOT
 from ..features.instant import add_derived
-from ..features.historical import add_label_free_aggregates
+from ..features.historical import add_label_free_aggregates, add_label_dependent_aggregates
 from .split import time_based_split, entity_overlap
 from .metrics import summary
 
@@ -63,10 +64,23 @@ class TrainOutput:
     test_metrics: dict
 
 
+def _features_config() -> dict:
+    with open(REPO_ROOT / "configs" / "features.yaml") as f:
+        return yaml.safe_load(f)
+
+
 def _build_full_frame() -> pd.DataFrame:
     df, _ = load_validated()
     df = add_derived(df, daytype_nan="unknown")
     df = add_label_free_aggregates(df)
+    cfg = _features_config()
+    ld = cfg.get("historical_label_dependent") or {}
+    if ld.get("enabled"):
+        lag = int(ld.get("label_availability_lag_days", 7))
+        sm = ld.get("smoothing") or {}
+        prior = float(sm.get("prior_strength", 50))
+        df = add_label_dependent_aggregates(df, label_lag_days=lag, prior_strength=prior)
+        print(f"[train] label-dependent FE enabled (lag={lag}d, prior={prior})")
     return df
 
 

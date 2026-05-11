@@ -47,7 +47,7 @@ historical_label_free:
 
 # Historical aggregate features — label-DEPENDENT (label delay riski taşır)
 historical_label_dependent:
-  enabled: false  # ilk turda kapalı; ikinci turda lag ile açılır
+  enabled: true  # improvements/v1: ablation ile kazancı doğrulandı
   label_availability_lag_days: 7
   device:
     windows_days: [30]

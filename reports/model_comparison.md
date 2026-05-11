@@ -30,12 +30,12 @@
 
 | Model | Variant | PR-AUC | ROC-AUC | Recall@0.1% | Recall@0.5% | Recall@1% | Recall@5% | Precision@1% |
 |---|---|---:|---:|---:|---:|---:|---:|---:|
-| hist_gbm | full | 0.3575 | 0.9700 | 0.3277 | 0.5924 | 0.7143 | 0.8782 | 0.1073 |
-| hist_gbm | demographic_free | 0.3546 | 0.9666 | 0.3151 | 0.5966 | 0.7269 | 0.8571 | 0.1091 |
-| random_forest | full | 0.2468 | 0.9596 | 0.2563 | 0.4916 | 0.6008 | 0.7941 | 0.0902 |
-| random_forest | demographic_free | 0.2368 | 0.9570 | 0.2353 | 0.4790 | 0.5798 | 0.7731 | 0.0871 |
-| logreg | full | 0.1780 | 0.9666 | 0.1975 | 0.5756 | 0.6933 | 0.8403 | 0.1041 |
-| logreg | demographic_free | 0.1626 | 0.9660 | 0.1765 | 0.5420 | 0.6723 | 0.8445 | 0.1009 |
+| hist_gbm | full | 0.7718 | 0.9813 | 0.5924 | 0.8655 | 0.9160 | 0.9454 | 0.1375 |
+| hist_gbm | demographic_free | 0.7673 | 0.9789 | 0.5840 | 0.8613 | 0.9076 | 0.9496 | 0.1363 |
+| random_forest | full | 0.7261 | 0.9919 | 0.5714 | 0.8445 | 0.8950 | 0.9538 | 0.1344 |
+| random_forest | demographic_free | 0.6920 | 0.9921 | 0.5378 | 0.8151 | 0.8908 | 0.9538 | 0.1338 |
+| logreg | full | 0.3503 | 0.9878 | 0.2899 | 0.7941 | 0.8824 | 0.9454 | 0.1325 |
+| logreg | demographic_free | 0.3486 | 0.9877 | 0.2899 | 0.7983 | 0.8782 | 0.9370 | 0.1319 |
 | rule_based | full | 0.0519 | 0.8194 | 0.0714 | 0.1723 | 0.2479 | 0.3950 | 0.0372 |
 | rule_based | demographic_free | 0.0519 | 0.8194 | 0.0714 | 0.1723 | 0.2479 | 0.3950 | 0.0372 |
 
@@ -43,12 +43,12 @@
 
 | Model | Variant | PR-AUC | ROC-AUC | Recall@1% | Precision@1% |
 |---|---|---:|---:|---:|---:|
-| hist_gbm | demographic_free | 0.5750 | 0.9798 | 0.7362 | 0.2800 |
-| hist_gbm | full | 0.5729 | 0.9800 | 0.7239 | 0.2754 |
-| random_forest | full | 0.4845 | 0.9742 | 0.6687 | 0.2544 |
-| random_forest | demographic_free | 0.4801 | 0.9732 | 0.6626 | 0.2520 |
-| logreg | full | 0.3847 | 0.9826 | 0.7055 | 0.2684 |
-| logreg | demographic_free | 0.3565 | 0.9817 | 0.6810 | 0.2590 |
+| hist_gbm | full | 0.9330 | 0.9967 | 0.9724 | 0.3699 |
+| hist_gbm | demographic_free | 0.9275 | 0.9954 | 0.9693 | 0.3687 |
+| random_forest | full | 0.9148 | 0.9987 | 0.9755 | 0.3711 |
+| random_forest | demographic_free | 0.8925 | 0.9985 | 0.9724 | 0.3699 |
+| logreg | full | 0.7692 | 0.9977 | 0.9540 | 0.3629 |
+| logreg | demographic_free | 0.7666 | 0.9976 | 0.9540 | 0.3629 |
 | rule_based | full | 0.0502 | 0.8240 | 0.1779 | 0.0677 |
 | rule_based | demographic_free | 0.0502 | 0.8240 | 0.1779 | 0.0677 |
 
@@ -57,13 +57,13 @@
 | Model | Full PR-AUC | Demografi-Free PR-AUC | Δ |
 |---|---:|---:|---:|
 | rule_based | 0.0519 | 0.0519 | +0.0000 |
-| logreg | 0.1780 | 0.1626 | -0.0154 |
-| random_forest | 0.2468 | 0.2368 | -0.0100 |
-| hist_gbm | 0.3575 | 0.3546 | -0.0029 |
+| logreg | 0.3503 | 0.3486 | -0.0016 |
+| random_forest | 0.7261 | 0.6920 | -0.0341 |
+| hist_gbm | 0.7718 | 0.7673 | -0.0045 |
 
 ## Önerilen model
 
-**`hist_gbm__full`** — Test PR-AUC = **0.3575**, Recall@1% = **0.7143** (Precision@1% = 0.1073).
+**`hist_gbm__full`** — Test PR-AUC = **0.7718**, Recall@1% = **0.9160** (Precision@1% = 0.1375).
 
 Demografi-free varyant ile fark < 0.02 PR-AUC: **demografi-free model production'a önerilir** (etik/regülatör avantajı).
 
