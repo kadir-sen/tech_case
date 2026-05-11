@@ -1,5 +1,5 @@
 {
   "best_model": "hist_gbm__demographic_free",
-  "HIGH": 0.9962578670662637,
-  "MEDIUM": 0.07594212932084357
+  "HIGH": 0.998923649025754,
+  "MEDIUM": 0.1849020428567538
 }

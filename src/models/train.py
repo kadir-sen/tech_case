@@ -123,10 +123,25 @@ def _model_rf(num, cat) -> Pipeline:
     ])
 
 
+_HGB_DEFAULTS = {
+    "learning_rate": 0.05, "max_iter": 400, "max_leaf_nodes": 63,
+    "min_samples_leaf": 100, "l2_regularization": 1.0, "max_features": 1.0,
+}
+
+
+def _load_hgb_params() -> dict:
+    """artifacts/best_hgb_params.json varsa onu döner; yoksa defaults."""
+    p = REPO_ROOT / "artifacts" / "best_hgb_params.json"
+    if not p.exists():
+        return dict(_HGB_DEFAULTS)
+    payload = json.loads(p.read_text())
+    out = dict(_HGB_DEFAULTS)
+    out.update(payload.get("params", {}))
+    return out
+
+
 def _model_hgb(num, cat) -> Pipeline:
-    """HistGradientBoostingClassifier — sklearn native, libomp gerekmiyor.
-    OrdinalEncoder + native categorical support kullanılıyor (one-hot patlamasını önler).
-    """
+    """HistGradientBoostingClassifier — params artifacts/best_hgb_params.json'dan okunur."""
     pre = ColumnTransformer([
         ("num", SimpleImputer(strategy="median"), num),
         ("cat", Pipeline([
@@ -135,11 +150,13 @@ def _model_hgb(num, cat) -> Pipeline:
         ]), cat),
     ])
     cat_indices = list(range(len(num), len(num) + len(cat)))
+    p = _load_hgb_params()
     return Pipeline([
         ("pre", pre),
         ("clf", HistGradientBoostingClassifier(
-            learning_rate=0.05, max_iter=400, max_leaf_nodes=63,
-            min_samples_leaf=100, l2_regularization=1.0,
+            learning_rate=p["learning_rate"], max_iter=p["max_iter"],
+            max_leaf_nodes=p["max_leaf_nodes"], min_samples_leaf=p["min_samples_leaf"],
+            l2_regularization=p["l2_regularization"], max_features=p.get("max_features", 1.0),
             class_weight="balanced", categorical_features=cat_indices,
             random_state=42,
         )),

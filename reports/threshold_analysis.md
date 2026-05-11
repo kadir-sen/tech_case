@@ -18,10 +18,10 @@
 | random_forest__full | 0.005 | 792 | 0.4770 | 0.2538 | 0.8445 | 84.45% |
 | random_forest__full | 0.01 | 1,585 | 0.3826 | 0.1344 | 0.8950 | 89.50% |
 | random_forest__full | 0.05 | 7,924 | 0.1632 | 0.0286 | 0.9538 | 95.38% |
-| hist_gbm__full | 0.001 | 158 | 0.9940 | 0.8924 | 0.5924 | 59.24% |
-| hist_gbm__full | 0.005 | 792 | 0.1949 | 0.2601 | 0.8655 | 86.55% |
-| hist_gbm__full | 0.01 | 1,585 | 0.0427 | 0.1375 | 0.9160 | 91.60% |
-| hist_gbm__full | 0.05 | 7,924 | 0.0043 | 0.0284 | 0.9454 | 94.54% |
+| hist_gbm__full | 0.001 | 158 | 0.9884 | 0.9241 | 0.6134 | 61.34% |
+| hist_gbm__full | 0.005 | 792 | 0.3956 | 0.2639 | 0.8782 | 87.82% |
+| hist_gbm__full | 0.01 | 1,585 | 0.1150 | 0.1356 | 0.9034 | 90.34% |
+| hist_gbm__full | 0.05 | 7,924 | 0.0055 | 0.0289 | 0.9622 | 96.22% |
 | rule_based__demographic_free | 0.001 | 158 | 0.5869 | 0.1076 | 0.0714 | 7.14% |
 | rule_based__demographic_free | 0.005 | 792 | 0.3906 | 0.0518 | 0.1723 | 17.23% |
 | rule_based__demographic_free | 0.01 | 1,585 | 0.3377 | 0.0372 | 0.2479 | 24.79% |
@@ -34,10 +34,10 @@
 | random_forest__demographic_free | 0.005 | 792 | 0.4891 | 0.2449 | 0.8151 | 81.51% |
 | random_forest__demographic_free | 0.01 | 1,585 | 0.3876 | 0.1338 | 0.8908 | 89.08% |
 | random_forest__demographic_free | 0.05 | 7,924 | 0.1820 | 0.0286 | 0.9538 | 95.38% |
-| hist_gbm__demographic_free | 0.001 | 158 | 0.9948 | 0.8797 | 0.5840 | 58.40% |
-| hist_gbm__demographic_free | 0.005 | 792 | 0.2262 | 0.2588 | 0.8613 | 86.13% |
-| hist_gbm__demographic_free | 0.01 | 1,585 | 0.0513 | 0.1363 | 0.9076 | 90.76% |
-| hist_gbm__demographic_free | 0.05 | 7,924 | 0.0051 | 0.0285 | 0.9496 | 94.96% |
+| hist_gbm__demographic_free | 0.001 | 158 | 0.9887 | 0.9177 | 0.6092 | 60.92% |
+| hist_gbm__demographic_free | 0.005 | 792 | 0.4291 | 0.2614 | 0.8697 | 86.97% |
+| hist_gbm__demographic_free | 0.01 | 1,585 | 0.1402 | 0.1350 | 0.8992 | 89.92% |
+| hist_gbm__demographic_free | 0.05 | 7,924 | 0.0058 | 0.0288 | 0.9580 | 95.80% |
 
 ## Perspektif 2: Business scenario (alerts/day) — test seti hacmine göre
 
@@ -55,10 +55,10 @@
 | random_forest__full | 100/day | 10,400 | 0.1352 | 0.0219 | 0.9580 |
 | random_forest__full | 350/day | 36,400 | 0.0492 | 0.0065 | 0.9916 |
 | random_forest__full | 1000/day | 104,000 | 0.0125 | 0.0023 | 1.0000 |
-| hist_gbm__full | 50/day | 5,200 | 0.0060 | 0.0431 | 0.9412 |
-| hist_gbm__full | 100/day | 10,400 | 0.0037 | 0.0218 | 0.9538 |
-| hist_gbm__full | 350/day | 36,400 | 0.0031 | 0.0063 | 0.9706 |
-| hist_gbm__full | 1000/day | 104,000 | 0.0031 | 0.0023 | 0.9874 |
+| hist_gbm__full | 50/day | 5,200 | 0.0096 | 0.0440 | 0.9622 |
+| hist_gbm__full | 100/day | 10,400 | 0.0040 | 0.0223 | 0.9748 |
+| hist_gbm__full | 350/day | 36,400 | 0.0016 | 0.0065 | 1.0000 |
+| hist_gbm__full | 1000/day | 104,000 | 0.0012 | 0.0023 | 1.0000 |
 | rule_based__demographic_free | 50/day | 5,200 | 0.2897 | 0.0165 | 0.3613 |
 | rule_based__demographic_free | 100/day | 10,400 | 0.2796 | 0.0093 | 0.4076 |
 | rule_based__demographic_free | 350/day | 36,400 | 0.1905 | 0.0048 | 0.7353 |
@@ -71,10 +71,10 @@
 | random_forest__demographic_free | 100/day | 10,400 | 0.1550 | 0.0222 | 0.9706 |
 | random_forest__demographic_free | 350/day | 36,400 | 0.0615 | 0.0065 | 0.9958 |
 | random_forest__demographic_free | 1000/day | 104,000 | 0.0160 | 0.0023 | 1.0000 |
-| hist_gbm__demographic_free | 50/day | 5,200 | 0.0074 | 0.0429 | 0.9370 |
-| hist_gbm__demographic_free | 100/day | 10,400 | 0.0044 | 0.0218 | 0.9538 |
-| hist_gbm__demographic_free | 350/day | 36,400 | 0.0038 | 0.0064 | 0.9748 |
-| hist_gbm__demographic_free | 1000/day | 104,000 | 0.0037 | 0.0022 | 0.9832 |
+| hist_gbm__demographic_free | 50/day | 5,200 | 0.0105 | 0.0431 | 0.9412 |
+| hist_gbm__demographic_free | 100/day | 10,400 | 0.0044 | 0.0221 | 0.9664 |
+| hist_gbm__demographic_free | 350/day | 36,400 | 0.0017 | 0.0065 | 0.9958 |
+| hist_gbm__demographic_free | 1000/day | 104,000 | 0.0012 | 0.0023 | 1.0000 |
 
 ## 3-Bant politika önerisi
 - **HIGH**: top %0.1 (otomatik blok / step-up auth).
