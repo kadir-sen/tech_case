@@ -21,12 +21,37 @@ import time
 import joblib
 import numpy as np
 import pandas as pd
+from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier, HistGradientBoostingClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
+
+
+class CatBoostPrep(BaseEstimator, TransformerMixin):
+    """Numerik kolonları median impute, kategorik kolonları string + 'NA' fill.
+
+    CatBoost native categorical handling kullanır; OrdinalEncoder yerine doğrudan
+    string ile besler.
+    """
+
+    def __init__(self, num_cols, cat_cols):
+        self.num_cols = list(num_cols)
+        self.cat_cols = list(cat_cols)
+        self._num_med = None
+
+    def fit(self, X, y=None):
+        self._num_med = X[self.num_cols].median(numeric_only=True)
+        return self
+
+    def transform(self, X):
+        out = X.copy()
+        out[self.num_cols] = out[self.num_cols].fillna(self._num_med)
+        for c in self.cat_cols:
+            out[c] = out[c].astype("string").fillna("NA")
+        return out[self.num_cols + self.cat_cols]
 
 import yaml
 from ..data.loader import load_validated, REPO_ROOT
@@ -140,6 +165,26 @@ def _load_hgb_params() -> dict:
     return out
 
 
+def _model_catboost(num, cat) -> Pipeline:
+    """CatBoost — ordered target encoding + native categorical support.
+
+    Bizim manuel olarak yaptığımız receiver_fraud_rate_smoothed (lag=7d) felsefesinin
+    yerleşik versiyonu. CatBoost'a kategorik kolonları string olarak veriyoruz —
+    OrdinalEncoder kullanmıyoruz; CatBoost kendi içinde ordered target encoding yapıyor.
+    """
+    from catboost import CatBoostClassifier
+    cat_indices = list(range(len(num), len(num) + len(cat)))
+    return Pipeline([
+        ("pre", CatBoostPrep(num, cat)),
+        ("clf", CatBoostClassifier(
+            iterations=600, learning_rate=0.05, depth=8,
+            l2_leaf_reg=3.0, auto_class_weights="Balanced",
+            cat_features=cat_indices, random_seed=42, verbose=False,
+            allow_writing_files=False,
+        )),
+    ])
+
+
 def _model_hgb(num, cat) -> Pipeline:
     """HistGradientBoostingClassifier — params artifacts/best_hgb_params.json'dan okunur."""
     pre = ColumnTransformer([
@@ -221,6 +266,7 @@ def train_all() -> dict:
             ("logreg", _model_lr),
             ("random_forest", _model_rf),
             ("hist_gbm", _model_hgb),
+            ("catboost", _model_catboost),
         ):
             print(f"  -> training {name} ({variant}) …")
             t1 = time.time()

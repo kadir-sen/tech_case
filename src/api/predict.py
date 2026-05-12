@@ -15,7 +15,7 @@ from ..data.loader import REPO_ROOT
 from ..features.instant import add_derived
 from .schemas import TransactionInput, ScoreResponse, ReasonCode
 
-MODEL_NAME = os.environ.get("MODEL_NAME", "hist_gbm__demographic_free")
+MODEL_NAME = os.environ.get("MODEL_NAME", "catboost__demographic_free")
 MODEL_PATH = REPO_ROOT / "artifacts" / "models" / f"{MODEL_NAME}.joblib"
 
 _state: dict = {"pipeline": None, "thresholds": None, "feature_cols": None,
