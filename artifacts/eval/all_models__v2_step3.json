@@ -474,7 +474,7 @@
           {
             "k_frac": 0.001,
             "n_alerts": 86,
-            "threshold": 0.9522933025366741,
+            "threshold": 0.9522933025366743,
             "precision": 0.9883720930232558,
             "recall": 0.2607361963190184,
             "tp": 85,
@@ -485,7 +485,7 @@
           {
             "k_frac": 0.005,
             "n_alerts": 428,
-            "threshold": 0.5446052676059161,
+            "threshold": 0.5446052676059159,
             "precision": 0.6869158878504673,
             "recall": 0.901840490797546,
             "tp": 294,
@@ -496,7 +496,7 @@
           {
             "k_frac": 0.01,
             "n_alerts": 857,
-            "threshold": 0.37824541959461316,
+            "threshold": 0.3782454195946132,
             "precision": 0.3663943990665111,
             "recall": 0.9631901840490797,
             "tp": 314,
@@ -520,7 +520,7 @@
           {
             "k_frac": 0.03502136303144918,
             "n_alerts": 3000,
-            "threshold": 0.1930395763384319,
+            "threshold": 0.19303957633843197,
             "precision": 0.108,
             "recall": 0.9938650306748467,
             "tp": 324,
@@ -579,7 +579,7 @@
           {
             "k_frac": 0.001,
             "n_alerts": 158,
-            "threshold": 0.759322266239325,
+            "threshold": 0.7593222662393246,
             "precision": 0.8417721518987342,
             "recall": 0.5588235294117647,
             "tp": 133,
@@ -590,7 +590,7 @@
           {
             "k_frac": 0.005,
             "n_alerts": 792,
-            "threshold": 0.45150165625028543,
+            "threshold": 0.4515016562502855,
             "precision": 0.25,
             "recall": 0.8319327731092437,
             "tp": 198,
@@ -601,7 +601,7 @@
           {
             "k_frac": 0.01,
             "n_alerts": 1585,
-            "threshold": 0.35919800726814044,
+            "threshold": 0.3591980072681404,
             "precision": 0.13501577287066246,
             "recall": 0.8991596638655462,
             "tp": 214,
@@ -637,7 +637,7 @@
           {
             "k_frac": 0.06562590708886,
             "n_alerts": 10400,
-            "threshold": 0.13739206050931907,
+            "threshold": 0.1373920605093191,
             "precision": 0.022115384615384617,
             "recall": 0.9663865546218487,
             "tp": 230,
@@ -649,7 +649,7 @@
           {
             "k_frac": 0.22969067481101002,
             "n_alerts": 36400,
-            "threshold": 0.05080151007063641,
+            "threshold": 0.05080151007063643,
             "precision": 0.006510989010989011,
             "recall": 0.9957983193277311,
             "tp": 237,
@@ -874,218 +874,6 @@
             "k_frac": 0.6562590708886,
             "n_alerts": 104000,
             "threshold": 0.001223443643471544,
-            "precision": 0.0022884615384615383,
-            "recall": 1.0,
-            "tp": 238,
-            "fp": 103762,
-            "fn": 0,
-            "fraud_capture_pct": 100.0,
-            "alerts_per_day_target": 1000
-          }
-        ]
-      }
-    },
-    "catboost__full": {
-      "val": {
-        "core": {
-          "roc_auc": 0.9995976568408618,
-          "pr_auc": 0.9640619052757924,
-          "base_rate": 0.0038056547827508115,
-          "n": 85662,
-          "n_positives": 326
-        },
-        "top_k_percentile": [
-          {
-            "k_frac": 0.001,
-            "n_alerts": 86,
-            "threshold": 0.9999963180926448,
-            "precision": 1.0,
-            "recall": 0.26380368098159507,
-            "tp": 86,
-            "fp": 0,
-            "fn": 240,
-            "fraud_capture_pct": 26.380368098159508
-          },
-          {
-            "k_frac": 0.005,
-            "n_alerts": 428,
-            "threshold": 0.389255608154556,
-            "precision": 0.7313084112149533,
-            "recall": 0.9601226993865031,
-            "tp": 313,
-            "fp": 115,
-            "fn": 13,
-            "fraud_capture_pct": 96.0122699386503
-          },
-          {
-            "k_frac": 0.01,
-            "n_alerts": 857,
-            "threshold": 0.04616750016742591,
-            "precision": 0.37456242707117854,
-            "recall": 0.9846625766871165,
-            "tp": 321,
-            "fp": 536,
-            "fn": 5,
-            "fraud_capture_pct": 98.46625766871165
-          },
-          {
-            "k_frac": 0.05,
-            "n_alerts": 4283,
-            "threshold": 0.001734231535400645,
-            "precision": 0.07611487275274341,
-            "recall": 1.0,
-            "tp": 326,
-            "fp": 3957,
-            "fn": 0,
-            "fraud_capture_pct": 100.0
-          }
-        ],
-        "by_alerts_per_day": [
-          {
-            "k_frac": 0.03502136303144918,
-            "n_alerts": 3000,
-            "threshold": 0.0032047551288326404,
-            "precision": 0.10866666666666666,
-            "recall": 1.0,
-            "tp": 326,
-            "fp": 2674,
-            "fn": 0,
-            "fraud_capture_pct": 100.0,
-            "alerts_per_day_target": 50
-          },
-          {
-            "k_frac": 0.07004272606289837,
-            "n_alerts": 6000,
-            "threshold": 0.0009865717072459336,
-            "precision": 0.05433333333333333,
-            "recall": 1.0,
-            "tp": 326,
-            "fp": 5674,
-            "fn": 0,
-            "fraud_capture_pct": 100.0,
-            "alerts_per_day_target": 100
-          },
-          {
-            "k_frac": 0.2451495412201443,
-            "n_alerts": 21000,
-            "threshold": 9.502836614021572e-05,
-            "precision": 0.015523809523809523,
-            "recall": 1.0,
-            "tp": 326,
-            "fp": 20674,
-            "fn": 0,
-            "fraud_capture_pct": 100.0,
-            "alerts_per_day_target": 350
-          },
-          {
-            "k_frac": 0.7004272606289836,
-            "n_alerts": 60000,
-            "threshold": 4.022255021771516e-06,
-            "precision": 0.005433333333333333,
-            "recall": 1.0,
-            "tp": 326,
-            "fp": 59674,
-            "fn": 0,
-            "fraud_capture_pct": 100.0,
-            "alerts_per_day_target": 1000
-          }
-        ]
-      },
-      "test": {
-        "core": {
-          "roc_auc": 0.9930089000134041,
-          "pr_auc": 0.8552747059330134,
-          "base_rate": 0.0015018236429950654,
-          "n": 158474,
-          "n_positives": 238
-        },
-        "top_k_percentile": [
-          {
-            "k_frac": 0.001,
-            "n_alerts": 158,
-            "threshold": 0.9879195634359174,
-            "precision": 0.9746835443037974,
-            "recall": 0.6470588235294118,
-            "tp": 154,
-            "fp": 4,
-            "fn": 84,
-            "fraud_capture_pct": 64.70588235294117
-          },
-          {
-            "k_frac": 0.005,
-            "n_alerts": 792,
-            "threshold": 0.12057529265807777,
-            "precision": 0.27146464646464646,
-            "recall": 0.9033613445378151,
-            "tp": 215,
-            "fp": 577,
-            "fn": 23,
-            "fraud_capture_pct": 90.33613445378151
-          },
-          {
-            "k_frac": 0.01,
-            "n_alerts": 1585,
-            "threshold": 0.030929406913245288,
-            "precision": 0.138801261829653,
-            "recall": 0.9243697478991597,
-            "tp": 220,
-            "fp": 1365,
-            "fn": 18,
-            "fraud_capture_pct": 92.43697478991596
-          },
-          {
-            "k_frac": 0.05,
-            "n_alerts": 7924,
-            "threshold": 0.0017735999967828744,
-            "precision": 0.028899545683997982,
-            "recall": 0.9621848739495799,
-            "tp": 229,
-            "fp": 7695,
-            "fn": 9,
-            "fraud_capture_pct": 96.21848739495799
-          }
-        ],
-        "by_alerts_per_day": [
-          {
-            "k_frac": 0.03281295354443,
-            "n_alerts": 5200,
-            "threshold": 0.0036269183913291304,
-            "precision": 0.04326923076923077,
-            "recall": 0.9453781512605042,
-            "tp": 225,
-            "fp": 4975,
-            "fn": 13,
-            "fraud_capture_pct": 94.53781512605042,
-            "alerts_per_day_target": 50
-          },
-          {
-            "k_frac": 0.06562590708886,
-            "n_alerts": 10400,
-            "threshold": 0.0011250946915300302,
-            "precision": 0.022211538461538463,
-            "recall": 0.9705882352941176,
-            "tp": 231,
-            "fp": 10169,
-            "fn": 7,
-            "fraud_capture_pct": 97.05882352941177,
-            "alerts_per_day_target": 100
-          },
-          {
-            "k_frac": 0.22969067481101002,
-            "n_alerts": 36400,
-            "threshold": 0.00011486387214018135,
-            "precision": 0.006483516483516484,
-            "recall": 0.9915966386554622,
-            "tp": 236,
-            "fp": 36164,
-            "fn": 2,
-            "fraud_capture_pct": 99.15966386554622,
-            "alerts_per_day_target": 350
-          },
-          {
-            "k_frac": 0.6562590708886,
-            "n_alerts": 104000,
-            "threshold": 5.757690695975991e-06,
             "precision": 0.0022884615384615383,
             "recall": 1.0,
             "tp": 238,
@@ -1545,7 +1333,7 @@
           {
             "k_frac": 0.005,
             "n_alerts": 428,
-            "threshold": 0.5541535495818051,
+            "threshold": 0.5541535495818052,
             "precision": 0.677570093457944,
             "recall": 0.8895705521472392,
             "tp": 290,
@@ -1592,7 +1380,7 @@
           {
             "k_frac": 0.07004272606289837,
             "n_alerts": 6000,
-            "threshold": 0.11527618847260167,
+            "threshold": 0.1152761884726017,
             "precision": 0.05416666666666667,
             "recall": 0.9969325153374233,
             "tp": 325,
@@ -1639,7 +1427,7 @@
           {
             "k_frac": 0.001,
             "n_alerts": 158,
-            "threshold": 0.7715909916992412,
+            "threshold": 0.7715909916992413,
             "precision": 0.8354430379746836,
             "recall": 0.5546218487394958,
             "tp": 132,
@@ -1661,7 +1449,7 @@
           {
             "k_frac": 0.01,
             "n_alerts": 1585,
-            "threshold": 0.3688061390457801,
+            "threshold": 0.3688061390457799,
             "precision": 0.13375394321766562,
             "recall": 0.8907563025210085,
             "tp": 212,
@@ -1685,7 +1473,7 @@
           {
             "k_frac": 0.03281295354443,
             "n_alerts": 5200,
-            "threshold": 0.2065851501013772,
+            "threshold": 0.20658515010137715,
             "precision": 0.0425,
             "recall": 0.9285714285714286,
             "tp": 221,
@@ -1721,7 +1509,7 @@
           {
             "k_frac": 0.6562590708886,
             "n_alerts": 104000,
-            "threshold": 0.011787693819523555,
+            "threshold": 0.011787693819523553,
             "precision": 0.0022884615384615383,
             "recall": 1.0,
             "tp": 238,
@@ -1934,218 +1722,6 @@
             "k_frac": 0.6562590708886,
             "n_alerts": 104000,
             "threshold": 0.0011690569696833758,
-            "precision": 0.0022884615384615383,
-            "recall": 1.0,
-            "tp": 238,
-            "fp": 103762,
-            "fn": 0,
-            "fraud_capture_pct": 100.0,
-            "alerts_per_day_target": 1000
-          }
-        ]
-      }
-    },
-    "catboost__demographic_free": {
-      "val": {
-        "core": {
-          "roc_auc": 0.9994848224643287,
-          "pr_auc": 0.9627568413655733,
-          "base_rate": 0.0038056547827508115,
-          "n": 85662,
-          "n_positives": 326
-        },
-        "top_k_percentile": [
-          {
-            "k_frac": 0.001,
-            "n_alerts": 86,
-            "threshold": 0.9999981491980456,
-            "precision": 1.0,
-            "recall": 0.26380368098159507,
-            "tp": 86,
-            "fp": 0,
-            "fn": 240,
-            "fraud_capture_pct": 26.380368098159508
-          },
-          {
-            "k_frac": 0.005,
-            "n_alerts": 428,
-            "threshold": 0.3587895617751338,
-            "precision": 0.7266355140186916,
-            "recall": 0.9539877300613497,
-            "tp": 311,
-            "fp": 117,
-            "fn": 15,
-            "fraud_capture_pct": 95.39877300613497
-          },
-          {
-            "k_frac": 0.01,
-            "n_alerts": 857,
-            "threshold": 0.037077447535010695,
-            "precision": 0.3733955659276546,
-            "recall": 0.9815950920245399,
-            "tp": 320,
-            "fp": 537,
-            "fn": 6,
-            "fraud_capture_pct": 98.15950920245399
-          },
-          {
-            "k_frac": 0.05,
-            "n_alerts": 4283,
-            "threshold": 0.0015730156753567925,
-            "precision": 0.07611487275274341,
-            "recall": 1.0,
-            "tp": 326,
-            "fp": 3957,
-            "fn": 0,
-            "fraud_capture_pct": 100.0
-          }
-        ],
-        "by_alerts_per_day": [
-          {
-            "k_frac": 0.03502136303144918,
-            "n_alerts": 3000,
-            "threshold": 0.0030155124105044275,
-            "precision": 0.10833333333333334,
-            "recall": 0.9969325153374233,
-            "tp": 325,
-            "fp": 2675,
-            "fn": 1,
-            "fraud_capture_pct": 99.69325153374233,
-            "alerts_per_day_target": 50
-          },
-          {
-            "k_frac": 0.07004272606289837,
-            "n_alerts": 6000,
-            "threshold": 0.0008873292074734485,
-            "precision": 0.05433333333333333,
-            "recall": 1.0,
-            "tp": 326,
-            "fp": 5674,
-            "fn": 0,
-            "fraud_capture_pct": 100.0,
-            "alerts_per_day_target": 100
-          },
-          {
-            "k_frac": 0.2451495412201443,
-            "n_alerts": 21000,
-            "threshold": 8.314322357078793e-05,
-            "precision": 0.015523809523809523,
-            "recall": 1.0,
-            "tp": 326,
-            "fp": 20674,
-            "fn": 0,
-            "fraud_capture_pct": 100.0,
-            "alerts_per_day_target": 350
-          },
-          {
-            "k_frac": 0.7004272606289836,
-            "n_alerts": 60000,
-            "threshold": 3.070541483283928e-06,
-            "precision": 0.005433333333333333,
-            "recall": 1.0,
-            "tp": 326,
-            "fp": 59674,
-            "fn": 0,
-            "fraud_capture_pct": 100.0,
-            "alerts_per_day_target": 1000
-          }
-        ]
-      },
-      "test": {
-        "core": {
-          "roc_auc": 0.9940431758031456,
-          "pr_auc": 0.8554164363919665,
-          "base_rate": 0.0015018236429950654,
-          "n": 158474,
-          "n_positives": 238
-        },
-        "top_k_percentile": [
-          {
-            "k_frac": 0.001,
-            "n_alerts": 158,
-            "threshold": 0.9871080140597099,
-            "precision": 0.9810126582278481,
-            "recall": 0.6512605042016807,
-            "tp": 155,
-            "fp": 3,
-            "fn": 83,
-            "fraud_capture_pct": 65.12605042016807
-          },
-          {
-            "k_frac": 0.005,
-            "n_alerts": 792,
-            "threshold": 0.10500429151268746,
-            "precision": 0.2702020202020202,
-            "recall": 0.8991596638655462,
-            "tp": 214,
-            "fp": 578,
-            "fn": 24,
-            "fraud_capture_pct": 89.91596638655463
-          },
-          {
-            "k_frac": 0.01,
-            "n_alerts": 1585,
-            "threshold": 0.02673707872490065,
-            "precision": 0.138801261829653,
-            "recall": 0.9243697478991597,
-            "tp": 220,
-            "fp": 1365,
-            "fn": 18,
-            "fraud_capture_pct": 92.43697478991596
-          },
-          {
-            "k_frac": 0.05,
-            "n_alerts": 7924,
-            "threshold": 0.0016997086218195566,
-            "precision": 0.028899545683997982,
-            "recall": 0.9621848739495799,
-            "tp": 229,
-            "fp": 7695,
-            "fn": 9,
-            "fraud_capture_pct": 96.21848739495799
-          }
-        ],
-        "by_alerts_per_day": [
-          {
-            "k_frac": 0.03281295354443,
-            "n_alerts": 5200,
-            "threshold": 0.003428561151442947,
-            "precision": 0.043653846153846154,
-            "recall": 0.9537815126050421,
-            "tp": 227,
-            "fp": 4973,
-            "fn": 11,
-            "fraud_capture_pct": 95.37815126050421,
-            "alerts_per_day_target": 50
-          },
-          {
-            "k_frac": 0.06562590708886,
-            "n_alerts": 10400,
-            "threshold": 0.001086256663734469,
-            "precision": 0.022307692307692306,
-            "recall": 0.9747899159663865,
-            "tp": 232,
-            "fp": 10168,
-            "fn": 6,
-            "fraud_capture_pct": 97.47899159663865,
-            "alerts_per_day_target": 100
-          },
-          {
-            "k_frac": 0.22969067481101002,
-            "n_alerts": 36400,
-            "threshold": 0.0001052600297167491,
-            "precision": 0.006510989010989011,
-            "recall": 0.9957983193277311,
-            "tp": 237,
-            "fp": 36163,
-            "fn": 1,
-            "fraud_capture_pct": 99.57983193277312,
-            "alerts_per_day_target": 350
-          },
-          {
-            "k_frac": 0.6562590708886,
-            "n_alerts": 104000,
-            "threshold": 4.645885754261362e-06,
             "precision": 0.0022884615384615383,
             "recall": 1.0,
             "tp": 238,

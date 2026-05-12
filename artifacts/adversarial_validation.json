@@ -1,0 +1,27 @@
+{
+  "adversarial_roc_auc": 0.9970958344535531,
+  "interpretation": "0.5 \u2248 no drift; 0.6-0.7 mild; 0.7-0.85 significant; \u22650.85 severe. Current: 0.997.",
+  "n_features": 56,
+  "top_20_drift_features": {
+    "device_first_seen_days_ago": 0.2803118388858801,
+    "receiver_first_seen_days_ago": 0.03713075011006384,
+    "device_label_n": 0.02099082987232581,
+    "device_tx_count_30d": 0.0038039579104474828,
+    "subnet_distinct_devices_all": 0.0014522392328899514,
+    "account_first_seen_days_ago": 0.0009537403150230069,
+    "receiver_tx_count_all": 0.0008618428144158511,
+    "DeviceModel": 0.0005256445720622412,
+    "device_fraud_rate_smoothed": 0.000368432121396219,
+    "receiver_label_n": 0.00029752164590701735,
+    "device_tx_count_all": 0.0002645217429839697,
+    "account_tx_count_all": 0.00024596468765865814,
+    "receiver_fraud_rate_smoothed": 0.00023360177245131583,
+    "receiver_distinct_senders_all": 0.00023022315056871653,
+    "receiver_tx_count_30d": 0.00015083568233797973,
+    "subnet_tx_count_7d": 0.00014934421862389247,
+    "CustomerTenure": 0.00011934246214632498,
+    "device_amount_max_prev": 9.969978357327047e-05,
+    "device_amount_std_prev": 8.395824648332884e-05,
+    "receiver_distinct_devices_all": 7.037273687116041e-05
+  }
+}

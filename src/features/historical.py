@@ -58,6 +58,41 @@ def _first_seen_days_ago(times: np.ndarray, by_vals: np.ndarray) -> np.ndarray:
     return out
 
 
+def _amount_aggregates_prev(by_vals: np.ndarray, amount: np.ndarray) -> dict[str, np.ndarray]:
+    """Per-group, current row HARİÇ, expanding mean/std/max of amount.
+
+    Bu "bu cihaz/receiver geçmişte ortalama X liraya tx yapardı; bu tx anormal mi?"
+    sinyalini taşıyor. PIT correct (current row dahil değil).
+    Inspired by IEEE-CIS 1st place UID-aggregations (card1_TransactionAmt_mean etc.).
+    """
+    n = len(by_vals)
+    mean_arr = np.zeros(n, dtype=np.float32)
+    std_arr = np.zeros(n, dtype=np.float32)
+    max_arr = np.zeros(n, dtype=np.float32)
+    for v, idx in _group_indices(by_vals).items():
+        a = amount[idx]
+        # expanding mean/std/max excluding current row
+        cum_sum = np.concatenate([[0.0], np.cumsum(a)])
+        cum_sq = np.concatenate([[0.0], np.cumsum(a * a)])
+        k = np.arange(len(idx))  # current row index within group (0..n-1)
+        # k=0 için: no history → 0 (will be filled by overall mean later via imputer)
+        with np.errstate(invalid="ignore", divide="ignore"):
+            mean_g = np.where(k > 0, cum_sum[k] / np.maximum(k, 1), 0.0)
+            var_g = np.where(k > 0, cum_sq[k] / np.maximum(k, 1) - mean_g * mean_g, 0.0)
+            std_g = np.sqrt(np.maximum(var_g, 0.0))
+        # running max excluding current
+        max_g = np.zeros(len(idx), dtype=np.float32)
+        running_max = -np.inf
+        for i in range(len(idx)):
+            max_g[i] = running_max if running_max > -np.inf else 0.0
+            if a[i] > running_max:
+                running_max = a[i]
+        mean_arr[idx] = mean_g.astype(np.float32)
+        std_arr[idx] = std_g.astype(np.float32)
+        max_arr[idx] = max_g
+    return {"mean": mean_arr, "std": std_arr, "max": max_arr}
+
+
 def add_label_free_aggregates(
     df: pd.DataFrame,
     device_windows: tuple[int, ...] = (1, 7, 30),
@@ -96,6 +131,19 @@ def add_label_free_aggregates(
     out["device_is_first_seen"] = (out["device_tx_count_all"] == 0).astype("int8")
     out["receiver_is_first_seen"] = (out["receiver_tx_count_all"] == 0).astype("int8")
     out["account_is_first_seen"] = (out["account_tx_count_all"] == 0).astype("int8")
+
+    # Amount aggregations per Device and Receiver (IEEE-CIS UID-aggregation pattern)
+    amt = out["TransactionAmount"].to_numpy().astype(np.float32)
+    for col, prefix in (("DeviceId", "device"), ("ReceiverName", "receiver")):
+        agg = _amount_aggregates_prev(out[col].to_numpy(), amt)
+        out[f"{prefix}_amount_mean_prev"] = agg["mean"]
+        out[f"{prefix}_amount_std_prev"] = agg["std"]
+        out[f"{prefix}_amount_max_prev"] = agg["max"]
+        # "olağandışılık" sinyali: current amount vs geçmiş ortalama
+        out[f"{prefix}_amount_ratio_to_mean"] = np.where(
+            agg["mean"] > 0, amt / agg["mean"], 1.0
+        ).astype(np.float32)
+
     return out
 
 
