@@ -17,6 +17,26 @@ def _bucket_high_cardinality(s: pd.Series, top_n: int, other_label: str) -> pd.S
     return s.where(s.isin(keep), other_label)
 
 
+def _device_parent_brand(model: str) -> str:
+    """DeviceModel string'inden parent brand çıkar (samsung / iPhone / Xiaomi / ...)."""
+    if not isinstance(model, str):
+        return "Unknown"
+    m = model.lower()
+    if "iphone" in m: return "iPhone"
+    if "samsung" in m or m.startswith("sm-"): return "Samsung"
+    if "redmi" in m or "xiaomi" in m or m.startswith("mi "): return "Xiaomi"
+    if "huawei" in m or m.startswith("hua"): return "Huawei"
+    if "oppo" in m: return "Oppo"
+    if "vivo" in m: return "Vivo"
+    if "realme" in m: return "Realme"
+    if "google" in m or "pixel" in m: return "Google"
+    if "oneplus" in m: return "OnePlus"
+    if "lg" in m: return "LG"
+    if "honor" in m: return "Honor"
+    if "tcl" in m: return "TCL"
+    return "Other"
+
+
 def add_derived(df: pd.DataFrame, daytype_nan: str = "unknown") -> pd.DataFrame:
     """Türev anlık feature'ları ekler.
 
@@ -25,6 +45,7 @@ def add_derived(df: pd.DataFrame, daytype_nan: str = "unknown") -> pd.DataFrame:
     """
     out = df.copy()
     if "DeviceModel" in out.columns:
+        out["DeviceParentBrand"] = out["DeviceModel"].apply(_device_parent_brand).astype(str)
         out["DeviceModel"] = _bucket_high_cardinality(out["DeviceModel"], DEVICE_MODEL_TOP_N, DEVICE_MODEL_OTHER)
     out["amount_log"] = np.log1p(out["TransactionAmount"].clip(lower=0))
     out["amount_bucket"] = pd.cut(
@@ -33,6 +54,8 @@ def add_derived(df: pd.DataFrame, daytype_nan: str = "unknown") -> pd.DataFrame:
         labels=["0-1k", "1k-5k", "5k-10k", "10k-25k", "25k-50k", "50k-100k", "100k+"],
     ).astype(str)
     out["is_round_amount"] = (out["TransactionAmount"] % 100 == 0).astype(int)
+    # Cents (decimal part of amount) — IEEE-CIS "Dollars/Cents split" adaptation
+    out["amount_cents"] = ((out["TransactionAmount"] * 100).round().astype("int64") % 100).astype("int16")
     out["hour"] = out["TransactionDate"].dt.hour.astype("int16")
     out["dow"] = out["TransactionDate"].dt.dayofweek.astype("int16")
     out["is_weekend"] = (out["dow"] >= 5).astype("int8")

@@ -50,7 +50,7 @@ CATEGORICAL = [
     "TransactionType", "DeviceOSName", "CustomerSegment",
     "CustomerEducation", "CustomerProfession", "CustomerMaritalStatus",
     "CustomerGender", "DayType_clean", "amount_bucket", "os_l1h", "os_l8h",
-    "DeviceModel",
+    "DeviceModel", "DeviceParentBrand",
 ]
 DEMOGRAPHIC = ["CustomerAge", "CustomerGender", "CustomerEducation", "CustomerMaritalStatus"]
 
