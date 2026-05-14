@@ -1,0 +1,82 @@
+{
+  "results": [
+    [
+      "health",
+      200,
+      {
+        "status": "ok",
+        "model": "final_model"
+      }
+    ],
+    [
+      "score_high",
+      200,
+      {
+        "fraud_score": 0.9997736737208821,
+        "risk_band": "MEDIUM",
+        "is_fraud": true,
+        "threshold_used": 0.0448862090269164,
+        "model_version": "final_model",
+        "score_calculated_at": "2026-05-13T11:00:40.536384Z",
+        "reason_codes": [
+          {
+            "feature": "f21",
+            "contribution": 7.755648055306605,
+            "direction": "increases_risk"
+          },
+          {
+            "feature": "f22",
+            "contribution": 7.672849460261054,
+            "direction": "increases_risk"
+          },
+          {
+            "feature": "f4",
+            "contribution": 1.8411306890981505,
+            "direction": "increases_risk"
+          },
+          {
+            "feature": "f24",
+            "contribution": 1.1315874619434783,
+            "direction": "increases_risk"
+          },
+          {
+            "feature": "f28",
+            "contribution": -0.7865148738820316,
+            "direction": "decreases_risk"
+          }
+        ]
+      }
+    ],
+    [
+      "score_low",
+      200,
+      {
+        "fraud_score": 3.74988134909247e-08,
+        "risk_band": "LOW",
+        "is_fraud": false,
+        "threshold_used": 0.0448862090269164,
+        "model_version": "final_model",
+        "score_calculated_at": "2026-05-13T11:00:40.547541Z",
+        "reason_codes": null
+      }
+    ],
+    [
+      "score_invalid",
+      422,
+      "..."
+    ],
+    [
+      "score_no_hist",
+      200,
+      {
+        "fraud_score": 4.301416464301083e-08,
+        "risk_band": "LOW",
+        "is_fraud": false,
+        "threshold_used": 0.0448862090269164,
+        "model_version": "final_model",
+        "score_calculated_at": "2026-05-13T11:00:40.557924Z",
+        "reason_codes": null
+      }
+    ]
+  ]
+}

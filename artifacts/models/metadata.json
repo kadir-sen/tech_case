@@ -1,0 +1,152 @@
+{
+  "model_name": "final_model",
+  "model_type": "CatBoostClassifier (auto_class_weights=Balanced)",
+  "model_artifact": "artifacts/models/final_model.joblib",
+  "model_sha256_prefix": "d82cd57f3960faa5",
+  "model_size_bytes": 7905464,
+  "feature_set_name": "selected_by_permutation",
+  "n_features": 30,
+  "selected_features": [
+    "device_fraud_rate_smoothed",
+    "receiver_fraud_rate_smoothed",
+    "DeviceModel",
+    "device_first_seen_days_ago",
+    "receiver_first_seen_days_ago",
+    "CustomerProfession",
+    "UniqueIPCount",
+    "os_l8h",
+    "CustomerTenure",
+    "IsFractionalAmount",
+    "receiver_distinct_devices_all",
+    "DeviceParentBrand",
+    "CustomerSegment",
+    "receiver_amount_mean_prev",
+    "receiver_amount_max_prev",
+    "receiver_distinct_senders_all",
+    "account_tx_count_all",
+    "HasMobileActivationL8H",
+    "device_is_first_seen",
+    "receiver_label_n",
+    "receiver_tx_count_all",
+    "device_tx_count_7d",
+    "receiver_is_first_seen",
+    "device_tx_count_1d",
+    "device_amount_ratio_to_mean",
+    "amount_log",
+    "DayType_clean",
+    "device_amount_mean_prev",
+    "HasMobileActivationL1H",
+    "account_is_first_seen"
+  ],
+  "demographic_excluded": true,
+  "params_strategy": "baseline (not tuned via Optuna; CatBoost baseline already strong)",
+  "params": {
+    "iterations": 600,
+    "learning_rate": 0.05,
+    "depth": 8,
+    "l2_leaf_reg": 3.0,
+    "bagging_temperature": 1.0,
+    "auto_class_weights": "Balanced"
+  },
+  "train_date_range": {
+    "start": "2022-09-17",
+    "end": "2024-03-31"
+  },
+  "validation_date_range": {
+    "start": "2024-04-01",
+    "end": "2024-05-31"
+  },
+  "test_date_range": {
+    "start": "2024-06-01",
+    "end": "2024-09-30"
+  },
+  "label_dependent_features_enabled": true,
+  "label_availability_lag_days": 7,
+  "metrics": {
+    "val": {
+      "pr_auc": 0.9620970916161025,
+      "roc_auc": 0.999413110268985,
+      "n_positives": 326.0,
+      "fraud_rate": 0.0038056547827508,
+      "brier": 0.0008940939642563,
+      "precision_at_1p1k": 1.0,
+      "recall_at_1p1k": 0.263803680981595,
+      "capture_at_1p1k": 26.380368098159508,
+      "precision_at_5p1k": 0.7266355140186916,
+      "recall_at_5p1k": 0.9539877300613496,
+      "capture_at_5p1k": 95.39877300613496,
+      "precision_at_1p": 0.3710618436406068,
+      "recall_at_1p": 0.9754601226993864,
+      "capture_at_1p": 97.54601226993866,
+      "precision_at_5p": 0.0758813915479803,
+      "recall_at_5p": 0.9969325153374232,
+      "capture_at_5p": 99.69325153374233,
+      "f1_at_1pct": 0.5376162299239222,
+      "f2_at_1pct": 0.7357704766311892
+    },
+    "test": {
+      "pr_auc": 0.8416628207407962,
+      "roc_auc": 0.9918692343592308,
+      "n_positives": 238.0,
+      "fraud_rate": 0.001501823642995,
+      "brier": 0.0009569522569131,
+      "precision_at_1p1k": 0.9746835443037974,
+      "recall_at_1p1k": 0.6470588235294118,
+      "capture_at_1p1k": 64.70588235294117,
+      "precision_at_5p1k": 0.2702020202020202,
+      "recall_at_5p1k": 0.8991596638655462,
+      "capture_at_5p1k": 89.91596638655463,
+      "precision_at_1p": 0.138801261829653,
+      "recall_at_1p": 0.9243697478991596,
+      "capture_at_1p": 92.43697478991596,
+      "precision_at_5p": 0.0290257445734477,
+      "recall_at_5p": 0.9663865546218487,
+      "capture_at_5p": 96.63865546218489,
+      "f1_at_1pct": 0.2413603949533735,
+      "f2_at_1pct": 0.43358297201419
+    },
+    "calibration": {
+      "uncalibrated": {
+        "brier": 0.0009569522569131361,
+        "pr_auc": 0.8416628207407962
+      },
+      "platt": {
+        "brier": 0.0005615796251112271,
+        "pr_auc": 0.8416628207407962
+      }
+    }
+  },
+  "threshold_policy": {
+    "best_model": "final_model",
+    "HIGH": 0.9999968355278889,
+    "MEDIUM": 0.0448862090269164,
+    "policy": {
+      "HIGH": "BLOCK_OR_STEP_UP",
+      "MEDIUM": "MANUAL_REVIEW",
+      "LOW": "ALLOW"
+    },
+    "derived_from": "val_set_percentiles"
+  },
+  "random_seed": 42,
+  "created_at": "2026-05-13T17:55:04.416631+00:00",
+  "references": {
+    "leakage_audit": "reports/leakage_audit.md",
+    "evaluation_protocol": "reports/evaluation_protocol.md",
+    "random_vs_time_leakage_check": "reports/random_vs_time_leakage_check.md",
+    "hpo_summary": "reports/hpo_summary.md",
+    "feature_selection_report": "reports/feature_selection_report.md",
+    "model_comparison": "reports/model_comparison.md",
+    "threshold_analysis": "reports/threshold_analysis.md",
+    "calibration_report": "reports/calibration_report.md",
+    "explainability_report": "reports/explainability_report.md"
+  },
+  "notes": [
+    "Test set yaln\u0131z final raporlama i\u00e7in kullan\u0131ld\u0131; HPO/FS/threshold se\u00e7imi train+val \u00fczerinde.",
+    "Drift signal mevcut: adversarial AUC train\u2194val 0.989. Label-dependent feature dominance %50+; production'da drift monitoring + label availability \u00f6l\u00e7\u00fcm\u00fc kritik.",
+    "Isotonic calibration test Brier'\u0131 en d\u00fc\u015f\u00fck (0.00045) ama test PR-AUC'\u0131 hafif d\u00fc\u015f\u00fcr\u00fcr (-0.02); operational kullan\u0131mda Platt \u00f6nerilir.",
+    "Ablation_questionable (2026-05-13): hour/dow/is_weekend/amount_bucket/amount_cents/is_round_amount drop edildi. EDA'da d\u00fcz \u00e7\u0131kan ve test PR-AUC'\u0131 d\u00fc\u015f\u00fcrmeyen feature'lar.",
+    "Ablation_questionable (2026-05-13): hour/dow/is_weekend/amount_bucket/amount_cents/is_round_amount drop edildi (ablation: katki yok veya negatif).",
+    "T\u00fcm 4 model (LR/RF/HGB/CatBoost) \u00d7 4 feature set yeni 50-feature pipeline ile retrain edildi (2026-05-13).",
+    "Final se\u00e7im: val PR-AUC en y\u00fcksek = catboost / baseline / selected_by_permutation (val 0.9621). 30 feature, drop edilen 6 zaten top-30'da yoktu."
+  ]
+}

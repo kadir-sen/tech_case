@@ -15,7 +15,7 @@ from ..data.loader import REPO_ROOT
 from ..features.instant import add_derived
 from .schemas import TransactionInput, ScoreResponse, ReasonCode
 
-MODEL_NAME = os.environ.get("MODEL_NAME", "catboost__demographic_free")
+MODEL_NAME = os.environ.get("MODEL_NAME", "final_model")
 MODEL_PATH = REPO_ROOT / "artifacts" / "models" / f"{MODEL_NAME}.joblib"
 
 _state: dict = {"pipeline": None, "thresholds": None, "feature_cols": None,
@@ -39,24 +39,26 @@ def _load_pipeline():
     return _state["pipeline"]
 
 
+def _expected_features() -> list[str]:
+    """Final model'in eğitildiği feature listesi — feature_list.json'dan."""
+    p = REPO_ROOT / "artifacts" / "models" / "feature_list.json"
+    if p.exists():
+        import json
+        return json.loads(p.read_text()).get("features", [])
+    return []
+
+
 def _build_features_row(tx: TransactionInput) -> pd.DataFrame:
     row = tx.model_dump()
     hist = row.pop("historical_features", None) or {}
     df = pd.DataFrame([row])
     df["TransactionDate"] = pd.to_datetime(df["TransactionDate"])
     df = add_derived(df)
+    # Client'tan gelen historical aggregate'leri ekle
     for k, v in hist.items():
         df[k] = v
-    expected_hist = [
-        "device_tx_count_all", "device_tx_count_1d", "device_tx_count_7d", "device_tx_count_30d",
-        "device_distinct_accounts_all", "device_distinct_receivers_all", "device_first_seen_days_ago",
-        "receiver_tx_count_all", "receiver_tx_count_7d", "receiver_tx_count_30d",
-        "receiver_distinct_senders_all", "receiver_distinct_devices_all", "receiver_first_seen_days_ago",
-        "subnet_tx_count_all", "subnet_tx_count_7d", "subnet_distinct_devices_all",
-        "account_tx_count_all", "account_first_seen_days_ago",
-        "device_is_first_seen", "receiver_is_first_seen", "account_is_first_seen",
-    ]
-    for k in expected_hist:
+    # Eksik historical kolonları 0 ile doldur (production: feature store sorgusu gerek)
+    for k in _expected_features():
         if k not in df.columns:
             df[k] = 0
     return df

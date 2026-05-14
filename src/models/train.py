@@ -21,7 +21,6 @@ import time
 import joblib
 import numpy as np
 import pandas as pd
-from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier, HistGradientBoostingClassifier
 from sklearn.impute import SimpleImputer
@@ -29,31 +28,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
 
-
-class CatBoostPrep(BaseEstimator, TransformerMixin):
-    """Numerik kolonları median impute, kategorik kolonları string + 'NA' fill.
-
-    CatBoost native categorical handling kullanır; OrdinalEncoder yerine doğrudan
-    string ile besler.
-    """
-
-    def __init__(self, num_cols, cat_cols):
-        self.num_cols = list(num_cols)
-        self.cat_cols = list(cat_cols)
-        self._num_med = None
-
-    def fit(self, X, y=None):
-        self._num_med = X[self.num_cols].median(numeric_only=True)
-        return self
-
-    def transform(self, X):
-        out = X.copy()
-        out[self.num_cols] = out[self.num_cols].fillna(self._num_med)
-        for c in self.cat_cols:
-            out[c] = out[c].astype("string").fillna("NA")
-        return out[self.num_cols + self.cat_cols]
-
 import yaml
+from .transformers import CatBoostPrep  # picklable across script entrypoints
 from ..data.loader import load_validated, REPO_ROOT
 from ..features.instant import add_derived
 from ..features.historical import add_label_free_aggregates, add_label_dependent_aggregates
@@ -74,8 +50,9 @@ DROP_FOR_FEATURES = (
 CATEGORICAL = [
     "TransactionType", "DeviceOSName", "CustomerSegment",
     "CustomerEducation", "CustomerProfession", "CustomerMaritalStatus",
-    "CustomerGender", "DayType_clean", "amount_bucket", "os_l1h", "os_l8h",
+    "CustomerGender", "DayType_clean", "os_l1h", "os_l8h",
     "DeviceModel", "DeviceParentBrand",
+    # NOT: amount_bucket ablation_questionable test ile drop edildi (test PR-AUC +0.0034 daha iyi olur).
 ]
 DEMOGRAPHIC = ["CustomerAge", "CustomerGender", "CustomerEducation", "CustomerMaritalStatus"]
 

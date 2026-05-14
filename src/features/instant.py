@@ -48,17 +48,15 @@ def add_derived(df: pd.DataFrame, daytype_nan: str = "unknown") -> pd.DataFrame:
         out["DeviceParentBrand"] = out["DeviceModel"].apply(_device_parent_brand).astype(str)
         out["DeviceModel"] = _bucket_high_cardinality(out["DeviceModel"], DEVICE_MODEL_TOP_N, DEVICE_MODEL_OTHER)
     out["amount_log"] = np.log1p(out["TransactionAmount"].clip(lower=0))
-    out["amount_bucket"] = pd.cut(
-        out["TransactionAmount"],
-        bins=[-1, 1_000, 5_000, 10_000, 25_000, 50_000, 100_000, np.inf],
-        labels=["0-1k", "1k-5k", "5k-10k", "10k-25k", "25k-50k", "50k-100k", "100k+"],
-    ).astype(str)
-    out["is_round_amount"] = (out["TransactionAmount"] % 100 == 0).astype(int)
-    # Cents (decimal part of amount) — IEEE-CIS "Dollars/Cents split" adaptation
-    out["amount_cents"] = ((out["TransactionAmount"] * 100).round().astype("int64") % 100).astype("int16")
-    out["hour"] = out["TransactionDate"].dt.hour.astype("int16")
-    out["dow"] = out["TransactionDate"].dt.dayofweek.astype("int16")
-    out["is_weekend"] = (out["dow"] >= 5).astype("int8")
+    # NOT (ablation_questionable kararı, 2026-05-13):
+    # - hour, dow, is_weekend: bu sentetik veride saatlik/günlük fraud rate DÜZ
+    #   (EDA: tüm saat ve gün-haftası fraud rate ~%0.6 ± 0.05). Ablation: Δ val PR-AUC
+    #   ≈ 0. Drop edildi.
+    # - amount_bucket, is_round_amount, amount_cents: IsFractionalAmount zaten kuruşlu
+    #   sinyalini taşıyor; bucket amount_log'la redundant. Ablation: drop edilince TEST
+    #   PR-AUC +0.0034 daha iyi. Drop edildi.
+    # is_holiday + DayType_clean tatil sinyalini taşıyor (resmi tatil fraud rate %0.86)
+    # — bu yüzden tutuldu.
 
     if daytype_nan == "normal":
         out["DayType_clean"] = out["DayType"].fillna("Normal")

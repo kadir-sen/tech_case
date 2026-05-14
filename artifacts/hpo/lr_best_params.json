@@ -1,0 +1,11 @@
+{
+  "model": "lr",
+  "n_trials": 15,
+  "best_val_pr_auc": 0.7874405928230479,
+  "best_params": {
+    "penalty": "l2",
+    "C": 0.0010550558461247964,
+    "max_iter": 500
+  },
+  "elapsed_s": 2662.7
+}

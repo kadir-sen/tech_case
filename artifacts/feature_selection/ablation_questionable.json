@@ -1,0 +1,77 @@
+[
+  {
+    "variant": "baseline_all",
+    "n_features": 56,
+    "val_pr_auc": 0.9618997046862926,
+    "test_pr_auc": 0.854809773345783,
+    "elapsed_s": 101.4
+  },
+  {
+    "variant": "drop_time_of_day",
+    "n_features": 55,
+    "val_pr_auc": 0.9639548635518833,
+    "test_pr_auc": 0.854618605556255,
+    "elapsed_s": 100.2,
+    "dropped": [
+      "hour"
+    ],
+    "n_dropped": 1
+  },
+  {
+    "variant": "drop_day_of_week",
+    "n_features": 54,
+    "val_pr_auc": 0.9620861670200815,
+    "test_pr_auc": 0.8540252542993678,
+    "elapsed_s": 98.0,
+    "dropped": [
+      "dow",
+      "is_weekend"
+    ],
+    "n_dropped": 2
+  },
+  {
+    "variant": "drop_amount_decoration",
+    "n_features": 53,
+    "val_pr_auc": 0.9619563721843487,
+    "test_pr_auc": 0.8581826200659791,
+    "elapsed_s": 92.8,
+    "dropped": [
+      "is_round_amount",
+      "amount_cents",
+      "amount_bucket"
+    ],
+    "n_dropped": 3
+  },
+  {
+    "variant": "drop_is_first_seen_binary",
+    "n_features": 53,
+    "val_pr_auc": 0.9594138878636344,
+    "test_pr_auc": 0.8531940668510598,
+    "elapsed_s": 106.5,
+    "dropped": [
+      "device_is_first_seen",
+      "receiver_is_first_seen",
+      "account_is_first_seen"
+    ],
+    "n_dropped": 3
+  },
+  {
+    "variant": "drop_all_combined",
+    "n_features": 47,
+    "val_pr_auc": 0.9612884929609711,
+    "test_pr_auc": 0.8528775437296511,
+    "elapsed_s": 103.6,
+    "dropped": [
+      "is_round_amount",
+      "amount_cents",
+      "hour",
+      "dow",
+      "is_weekend",
+      "device_is_first_seen",
+      "receiver_is_first_seen",
+      "account_is_first_seen",
+      "amount_bucket"
+    ],
+    "n_dropped": 9
+  }
+]

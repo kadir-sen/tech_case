@@ -1,0 +1,11 @@
+{
+  "best_model": "final_model",
+  "HIGH": 0.9999968355278889,
+  "MEDIUM": 0.0448862090269164,
+  "policy": {
+    "HIGH": "BLOCK_OR_STEP_UP",
+    "MEDIUM": "MANUAL_REVIEW",
+    "LOW": "ALLOW"
+  },
+  "derived_from": "val_set_percentiles"
+}
